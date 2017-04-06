@@ -20,6 +20,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -46,18 +48,27 @@ public class Vieta implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "Pavadinimas")
     private String pavadinimas;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "Trumpas_aprasymas")
     private String trumpasaprasymas;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "Vietos_aplankalas")
     private String vietosaplankalas;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "koordinates")
     private String koordinates;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "sukurimo_data")
     @Temporal(TemporalType.DATE)
     private Date sukurimoData;

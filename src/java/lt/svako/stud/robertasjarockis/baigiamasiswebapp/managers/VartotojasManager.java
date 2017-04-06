@@ -42,7 +42,7 @@ public class VartotojasManager {
     EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            list = em.createNamedQuery("Vartotojas.findByVartotojopav").setParameter("vartotopav", username).getResultList();
+            list = em.createNamedQuery("Vartotojas.findByVartotojopav").setParameter("vartotojopav", username).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);

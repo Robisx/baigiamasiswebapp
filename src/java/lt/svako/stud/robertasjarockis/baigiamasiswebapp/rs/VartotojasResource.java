@@ -18,6 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import lt.svako.stud.robertasjarockis.baigiamasiswebapp.entities.Vartotojas;
 import lt.svako.stud.robertasjarockis.baigiamasiswebapp.managers.VartotojasManager;
+import lt.svako.stud.robertasjarockis.baigiamasiswebapp.utils.Utils;
 
 /**
  * REST Web Service
@@ -42,18 +43,20 @@ public class VartotojasResource {
      * Retrieves representation of an instance of lt.svako.stud.robertasjarockis.baigiamasiswebapp.rs.VartotojasResource
      * @return an instance of java.lang.String
      */
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Vartotojas> getJson() {
-        VartotojasManager varman = new VartotojasManager();
-        return varman.getAllVartotojai();
-    }
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<Vartotojas> getJson() {
+//        VartotojasManager varman = new VartotojasManager();
+//        return varman.getAllVartotojai();
+   // }
     @GET
     @Produces (MediaType.APPLICATION_JSON)
-    public List<Vartotojas> authJson(){
-        String stringUsername = req.getServletContext().getInitParameter("request_user");
-        String stringPassword = req.getServletContext().getInitParameter("request_pass");
-        return null;
+    public Vartotojas authJson(){
+        String stringUsername = req.getHeader("request_user");
+        String stringPassword = req.getHeader("request_pass");
+        System.out.println(stringUsername);
+        System.out.println(stringPassword);
+        return Utils.authenticate(stringUsername, stringPassword).get(0);
     }
 
     /**

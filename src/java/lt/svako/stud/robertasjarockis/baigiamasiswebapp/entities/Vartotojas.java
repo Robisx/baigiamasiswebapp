@@ -18,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,8 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vartotojas.findByPavarde", query = "SELECT v FROM Vartotojas v WHERE v.pavarde = :pavarde")
     , @NamedQuery(name = "Vartotojas.findByElPastas", query = "SELECT v FROM Vartotojas v WHERE v.elPastas = :elPastas")
     , @NamedQuery(name = "Vartotojas.findByAmzius", query = "SELECT v FROM Vartotojas v WHERE v.amzius = :amzius")
-    , @NamedQuery(name = "Vartotojas.findByTelefonas", query = "SELECT v FROM Vartotojas v WHERE v.telefonas = :telefonas")
-    , @NamedQuery(name = "Vartotojas.findByVietosid", query = "SELECT v FROM Vartotojas v WHERE v.vietosid = :vietosid")})
+    , @NamedQuery(name = "Vartotojas.findByTelefonas", query = "SELECT v FROM Vartotojas v WHERE v.telefonas = :telefonas")})
 public class Vartotojas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,29 +49,38 @@ public class Vartotojas implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "Vartotojo_pav")
     private String vartotojopav;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "Slaptazodis")
     private String slaptazodis;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "Vardas")
     private String vardas;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "Pavarde")
     private String pavarde;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "el_pastas")
     private String elPastas;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "amzius")
     private int amzius;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "telefonas")
     private int telefonas;
-    @Basic(optional = false)
-    @Column(name = "Vietos_id")
-    private int vietosid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vartotojoid")
     private Collection<Vieta> vietaCollection;
 
@@ -81,7 +91,7 @@ public class Vartotojas implements Serializable {
         this.id = id;
     }
 
-    public Vartotojas(Integer id, String vartotojopav, String slaptazodis, String vardas, String pavarde, String elPastas, int amzius, int telefonas, int vietosid) {
+    public Vartotojas(Integer id, String vartotojopav, String slaptazodis, String vardas, String pavarde, String elPastas, int amzius, int telefonas) {
         this.id = id;
         this.vartotojopav = vartotojopav;
         this.slaptazodis = slaptazodis;
@@ -90,7 +100,6 @@ public class Vartotojas implements Serializable {
         this.elPastas = elPastas;
         this.amzius = amzius;
         this.telefonas = telefonas;
-        this.vietosid = vietosid;
     }
 
     public Integer getId() {
@@ -155,14 +164,6 @@ public class Vartotojas implements Serializable {
 
     public void setTelefonas(int telefonas) {
         this.telefonas = telefonas;
-    }
-
-    public int getVietosid() {
-        return vietosid;
-    }
-
-    public void setVietosid(int vietosid) {
-        this.vietosid = vietosid;
     }
 
     @XmlTransient
