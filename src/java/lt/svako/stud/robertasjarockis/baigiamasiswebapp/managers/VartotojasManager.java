@@ -52,6 +52,10 @@ public class VartotojasManager {
         }
         return list;
 }
+    public void createVartotojas(Vartotojas vartotojas){
+        persist(vartotojas);
+    }
+    
     private void persist(Object object) {
         EntityManager em = emf.createEntityManager();
         try {

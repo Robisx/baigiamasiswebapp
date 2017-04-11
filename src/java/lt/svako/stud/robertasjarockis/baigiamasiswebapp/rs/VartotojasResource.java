@@ -5,7 +5,6 @@
  */
 package lt.svako.stud.robertasjarockis.baigiamasiswebapp.rs;
 
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -16,6 +15,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import lt.svako.stud.robertasjarockis.baigiamasiswebapp.entities.Vartotojas;
 import lt.svako.stud.robertasjarockis.baigiamasiswebapp.managers.VartotojasManager;
 import lt.svako.stud.robertasjarockis.baigiamasiswebapp.utils.Utils;
@@ -66,5 +66,16 @@ public class VartotojasResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response postJson(String content){
+       Vartotojas parse = Utils.parseVartotojas(content);
+        System.out.println(content);
+        VartotojasManager vm = new VartotojasManager();
+        System.out.println(parse.getVartotojopav());
+        vm.createVartotojas(parse);
+        return Response.status(201).build();
     }
 }
