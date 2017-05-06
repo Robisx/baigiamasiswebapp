@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -34,6 +35,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "VietosPaveiksliukas.findByPaveiksliukoUrl", query = "SELECT v FROM VietosPaveiksliukas v WHERE v.paveiksliukoUrl = :paveiksliukoUrl")
     , @NamedQuery(name = "VietosPaveiksliukas.findByPaveiksliukoSeka", query = "SELECT v FROM VietosPaveiksliukas v WHERE v.paveiksliukoSeka = :paveiksliukoSeka")})
 public class VietosPaveiksliukas implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Column(name = "paveiksliuko_blob")
+    private byte[] paveiksliukoBlob;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -137,6 +144,14 @@ public class VietosPaveiksliukas implements Serializable {
     @Override
     public String toString() {
         return "lt.svako.stud.robertasjarockis.baigiamasiswebapp.entities.VietosPaveiksliukas[ id=" + id + " ]";
+    }
+
+    public byte[] getPaveiksliukoBlob() {
+        return paveiksliukoBlob;
+    }
+
+    public void setPaveiksliukoBlob(byte[] paveiksliukoBlob) {
+        this.paveiksliukoBlob = paveiksliukoBlob;
     }
     
 }

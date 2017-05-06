@@ -22,12 +22,12 @@ public class VietaManager {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("Baigiamasis_WebAPPPU");
 
-    public List<Vieta> getAllVieta(){
+    public List<Vieta> getAllVieta() {
         List<Vieta> list = new ArrayList<>();
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-           list = em.createNamedQuery("Vieta.findAll").getResultList();
+            list = em.createNamedQuery("Vieta.findAll").getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
@@ -37,6 +37,7 @@ public class VietaManager {
         }
         return list;
     }
+
     private void persist(Object object) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -50,5 +51,8 @@ public class VietaManager {
             em.close();
         }
     }
-    
+
+    public void addVieta(Vieta vieta) {
+        persist(vieta);
+    }
 }

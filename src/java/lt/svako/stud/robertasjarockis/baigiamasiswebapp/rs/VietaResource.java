@@ -11,11 +11,16 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import lt.svako.stud.robertasjarockis.baigiamasiswebapp.entities.Vartotojas;
 import lt.svako.stud.robertasjarockis.baigiamasiswebapp.entities.Vieta;
+import lt.svako.stud.robertasjarockis.baigiamasiswebapp.managers.VartotojasManager;
 import lt.svako.stud.robertasjarockis.baigiamasiswebapp.managers.VietaManager;
+import lt.svako.stud.robertasjarockis.baigiamasiswebapp.utils.Utils;
 
 /**
  * REST Web Service
@@ -52,5 +57,14 @@ public class VietaResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
+    }
+        
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response postJson(String content){
+        System.out.println(content);
+        VietaManager vm = new VietaManager();
+        vm.addVieta(Utils.parseVieta(content));
+        return Response.status(201).build();
     }
 }

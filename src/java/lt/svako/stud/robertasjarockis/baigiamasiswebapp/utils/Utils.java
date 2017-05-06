@@ -8,6 +8,7 @@ package lt.svako.stud.robertasjarockis.baigiamasiswebapp.utils;
 import com.google.gson.Gson;
 import java.util.List;
 import lt.svako.stud.robertasjarockis.baigiamasiswebapp.entities.Vartotojas;
+import lt.svako.stud.robertasjarockis.baigiamasiswebapp.entities.Vieta;
 import lt.svako.stud.robertasjarockis.baigiamasiswebapp.managers.VartotojasManager;
 
 /**
@@ -15,19 +16,25 @@ import lt.svako.stud.robertasjarockis.baigiamasiswebapp.managers.VartotojasManag
  * @author User1
  */
 public class Utils {
-    public static List<Vartotojas> authenticate(String user,String pass){
+
+    public static List<Vartotojas> authenticate(String user, String pass) {
         VartotojasManager vm = new VartotojasManager();
         List<Vartotojas> list = null;
         list = vm.getVartotojas(user);
-        if (pass.equals(list.get(0).getSlaptazodis())){
+        if (pass.equals(list.get(0).getSlaptazodis())) {
             return list;
-        }else {
+        } else {
             return null;
         }
     }
-    public static Vartotojas parseVartotojas(String parse){
+
+    public static Vartotojas parseVartotojas(String parse) {
         Gson gson = new Gson();
         return gson.fromJson(parse, Vartotojas.class);
-    
-}
+    }
+
+    public static Vieta parseVieta(String parse) {
+        Gson gson = new Gson();
+        return gson.fromJson(parse, Vieta.class);
+    }
 }

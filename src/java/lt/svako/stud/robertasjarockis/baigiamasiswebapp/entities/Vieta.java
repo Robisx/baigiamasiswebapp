@@ -36,7 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Vieta.findById", query = "SELECT v FROM Vieta v WHERE v.id = :id")
     , @NamedQuery(name = "Vieta.findByPavadinimas", query = "SELECT v FROM Vieta v WHERE v.pavadinimas = :pavadinimas")
     , @NamedQuery(name = "Vieta.findByTrumpasaprasymas", query = "SELECT v FROM Vieta v WHERE v.trumpasaprasymas = :trumpasaprasymas")
-    , @NamedQuery(name = "Vieta.findByVietosaplankalas", query = "SELECT v FROM Vieta v WHERE v.vietosaplankalas = :vietosaplankalas")
     , @NamedQuery(name = "Vieta.findByKoordinates", query = "SELECT v FROM Vieta v WHERE v.koordinates = :koordinates")
     , @NamedQuery(name = "Vieta.findBySukurimoData", query = "SELECT v FROM Vieta v WHERE v.sukurimoData = :sukurimoData")})
 public class Vieta implements Serializable {
@@ -57,11 +56,6 @@ public class Vieta implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "Trumpas_aprasymas")
     private String trumpasaprasymas;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "Vietos_aplankalas")
-    private String vietosaplankalas;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -86,11 +80,10 @@ public class Vieta implements Serializable {
         this.id = id;
     }
 
-    public Vieta(Integer id, String pavadinimas, String trumpasaprasymas, String vietosaplankalas, String koordinates, Date sukurimoData) {
+    public Vieta(Integer id, String pavadinimas, String trumpasaprasymas, String koordinates, Date sukurimoData) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.trumpasaprasymas = trumpasaprasymas;
-        this.vietosaplankalas = vietosaplankalas;
         this.koordinates = koordinates;
         this.sukurimoData = sukurimoData;
     }
@@ -117,14 +110,6 @@ public class Vieta implements Serializable {
 
     public void setTrumpasaprasymas(String trumpasaprasymas) {
         this.trumpasaprasymas = trumpasaprasymas;
-    }
-
-    public String getVietosaplankalas() {
-        return vietosaplankalas;
-    }
-
-    public void setVietosaplankalas(String vietosaplankalas) {
-        this.vietosaplankalas = vietosaplankalas;
     }
 
     public String getKoordinates() {

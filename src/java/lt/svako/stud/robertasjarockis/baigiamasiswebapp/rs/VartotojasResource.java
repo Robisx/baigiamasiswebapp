@@ -40,7 +40,9 @@ public class VartotojasResource {
     }
 
     /**
-     * Retrieves representation of an instance of lt.svako.stud.robertasjarockis.baigiamasiswebapp.rs.VartotojasResource
+     * Retrieves representation of an instance of
+     * lt.svako.stud.robertasjarockis.baigiamasiswebapp.rs.VartotojasResource
+     *
      * @return an instance of java.lang.String
      */
 //    @GET
@@ -48,10 +50,10 @@ public class VartotojasResource {
 //    public List<Vartotojas> getJson() {
 //        VartotojasManager varman = new VartotojasManager();
 //        return varman.getAllVartotojai();
-   // }
+    // }
     @GET
-    @Produces (MediaType.APPLICATION_JSON)
-    public Vartotojas authJson(){
+    @Produces(MediaType.APPLICATION_JSON)
+    public Vartotojas authJson() {
         String stringUsername = req.getHeader("request_user");
         String stringPassword = req.getHeader("request_pass");
         System.out.println(stringUsername);
@@ -61,20 +63,19 @@ public class VartotojasResource {
 
     /**
      * PUT method for updating or creating an instance of VartotojasResource
+     *
      * @param content representation for the resource
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postJson(String content){
-       Vartotojas parse = Utils.parseVartotojas(content);
-        System.out.println(content);
+    public Response postJson(String content) {
+        Vartotojas parse = Utils.parseVartotojas(content);
         VartotojasManager vm = new VartotojasManager();
-        System.out.println(parse.getVartotojopav());
         vm.createVartotojas(parse);
         return Response.status(201).build();
     }
