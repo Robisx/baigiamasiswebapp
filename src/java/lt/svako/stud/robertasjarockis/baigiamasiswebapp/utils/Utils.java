@@ -30,11 +30,13 @@ public class Utils {
 
     public static Vartotojas parseVartotojas(String parse) {
         Gson gson = new Gson();
+        System.out.println(parse);
         return gson.fromJson(parse, Vartotojas.class);
     }
 
     public static Vieta parseVieta(String parse) {
         Gson gson = new Gson();
+        System.out.println(parse);
         return gson.fromJson(parse, Vieta.class);
     }
 }
