@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,7 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Vieta.findAll", query = "SELECT v FROM Vieta v")
     , @NamedQuery(name = "Vieta.findById", query = "SELECT v FROM Vieta v WHERE v.id = :id")
     , @NamedQuery(name = "Vieta.findByPavadinimas", query = "SELECT v FROM Vieta v WHERE v.pavadinimas = :pavadinimas")
-    , @NamedQuery(name = "Vieta.findByTrumpasaprasymas", query = "SELECT v FROM Vieta v WHERE v.trumpasaprasymas = :trumpasaprasymas")
     , @NamedQuery(name = "Vieta.findByKoordinates", query = "SELECT v FROM Vieta v WHERE v.koordinates = :koordinates")
     , @NamedQuery(name = "Vieta.findBySukurimoData", query = "SELECT v FROM Vieta v WHERE v.sukurimoData = :sukurimoData")})
 public class Vieta implements Serializable {
@@ -48,12 +48,13 @@ public class Vieta implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
+    @Size(min = 1, max = 80)
     @Column(name = "Pavadinimas")
     private String pavadinimas;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
+    @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "Trumpas_aprasymas")
     private String trumpasaprasymas;
     @Basic(optional = false)
@@ -66,6 +67,11 @@ public class Vieta implements Serializable {
     @Column(name = "sukurimo_data")
     @Temporal(TemporalType.DATE)
     private Date sukurimoData;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Column(name = "Paveiksliukas")
+    private byte[] paveiksliukas;
     @JoinColumn(name = "Vartotojo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Vartotojas vartotojoid;
@@ -80,12 +86,13 @@ public class Vieta implements Serializable {
         this.id = id;
     }
 
-    public Vieta(Integer id, String pavadinimas, String trumpasaprasymas, String koordinates, Date sukurimoData) {
+    public Vieta(Integer id, String pavadinimas, String trumpasaprasymas, String koordinates, Date sukurimoData, byte[] paveiksliukas) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.trumpasaprasymas = trumpasaprasymas;
         this.koordinates = koordinates;
         this.sukurimoData = sukurimoData;
+        this.paveiksliukas = paveiksliukas;
     }
 
     public Integer getId() {
@@ -126,6 +133,14 @@ public class Vieta implements Serializable {
 
     public void setSukurimoData(Date sukurimoData) {
         this.sukurimoData = sukurimoData;
+    }
+
+    public byte[] getPaveiksliukas() {
+        return paveiksliukas;
+    }
+
+    public void setPaveiksliukas(byte[] paveiksliukas) {
+        this.paveiksliukas = paveiksliukas;
     }
 
     public Vartotojas getVartotojoid() {
